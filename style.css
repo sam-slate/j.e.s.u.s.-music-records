@@ -91,7 +91,7 @@ h1 {
 }
 
 .turntable {
-    max-width: 50vw;
+    max-width: 35vw;  /* Changed from 50vw */
     width: 100%;
     height: auto;
 }
