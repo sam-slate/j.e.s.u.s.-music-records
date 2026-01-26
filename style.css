@@ -1,0 +1,376 @@
+@font-face {
+    font-family: 'Aldrich';
+    src: url('./Aldrich-Regular.ttf') format('truetype');
+}
+
+body {
+    background-image: url('background.jpeg');
+    background-repeat: repeat;
+    background-size: 100px 100px;
+    font-family: 'Aldrich', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+header {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.menorah-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.logo {
+    max-width: 50vw;
+    height: auto;
+    display: block;
+}
+
+.menorah {
+    max-width: 10vw;
+    height: auto;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.menorah-left {
+    position: absolute;
+    left: -17vw;
+    top: 10px;
+}
+
+.menorah-right {
+    position: absolute;
+    right: -17vw;
+    top: 10px;
+}
+
+h1 {
+    font-family: 'Aldrich', sans-serif;
+    font-size: 2em;
+    margin: 0;
+    color: black;
+    letter-spacing: 0.1em;
+}
+
+.turntable-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.turntable {
+    max-width: 50vw;
+    width: 100%;
+    height: auto;
+}
+
+main {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: chartreuse;
+    background-color: black;
+}
+
+.button-container {
+    position: absolute;
+    left: -180px;  /* Negative value to move them left of the turntable */
+    top: 20px;        /* Changed from 50vh to align with top of turntable */
+    transform: none;  /* Remove the translateY */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+
+.content-wrapper {
+    position: relative;
+    margin: 40px 0;
+}
+
+.premier-marquee{
+    font-size: 24px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: chartreuse;
+    z-index: 1000;
+    padding: 5px;
+}
+
+.lyrics {
+    font-size: 18px;
+    width: 100vw;
+    height: 50vw;
+    position: fixed;
+    bottom: 0;
+    right: -80%;
+    margin: 0;
+    z-index: 500;  /* Changed from 1000 */
+    padding: 5px;
+    pointer-events: none;  /* Also add this so clicks pass through */
+}
+
+.lyrics-marquee {
+    width: 300px; 
+    height: 100%;
+    pointer-events: auto;  /* Re-enable pointer events just for the marquee */
+}
+
+/* Pop-up ad styles */
+.popup-ad {
+    position: fixed;
+    background-color: white;
+    border: 3px solid #000;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    z-index: 999;
+    max-width: 300px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    cursor: grab;
+    user-select: none;
+}
+
+.popup-ad.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.popup-ad img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border: 2px solid #000;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    pointer-events: auto;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+
+:root {
+  /* Project Colors */
+    --color-cod-gray: #111;
+    --color-seashell: #f1f1f1;
+    --color-silver: #ccc;
+    --color-white: #fff;
+    --color-gallery: #eee;
+    --color-mercury: #e6e6e6;
+    --color-shalimar: #fff9c0;
+    --color-jelly-bean: #21759b;
+    --color-dove-gray: #666;
+    --color-royal-blue: #4169e1;
+    --color-fresh-eggplant: #800080;
+    --color-lucky-point: #191970;
+    --color-tundora: #404040;
+    --color-black: #000;
+
+    --c-background-button-netscape: var(--color-silver);
+    --c-link: blue;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: teal;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+/* 90s Netscape button */
+.button--netscape {
+    align-items: center;
+    background: var(--c-background-button-netscape);
+    border-color: var(--color-gallery) var(--color-cod-gray) var(--color-cod-gray) var(--color-gallery);
+    border-radius: 0;
+    border-width: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "Times New Roman";
+    font-weight: 700;
+    min-height: 31px;
+    min-width: 88px;
+    padding: 2px 4px 2px 2px;
+    position: relative;
+    white-space: nowrap;
+  
+  /* Zoom */
+  zoom: 1.5;
+
+    &:hover,
+    &:focus {
+        outline: 1px dotted var(--c-link);
+    }
+
+    &:active {
+        border-color: var(--color-cod-gray) transparent transparent var(--color-cod-gray);
+    padding: 4px 2px 0px 4px;
+    }
+
+    &::before {
+        align-items: center;
+        background: var(--color-royal-blue);
+        content: "✡️";
+        display: flex;
+        flex: 0 0 24px;
+        font-size: 14px;
+        height: 23px;
+        justify-content: center;
+        line-height: 0;
+        margin-right: 4px;
+        overflow: hidden;
+        padding-top: 2px;
+        width: 24px;
+    }
+}
+
+.button--theme {
+  &::before {
+    background: var(--color-cod-gray);
+    content: "💡";
+    text-shadow: 0 0 4px #FF6;
+  }
+}
+
+.button--dark {
+  background: var(--color-cod-gray);
+  color: red;
+    border-top-color: var(--color-cod-gray);
+  border-left-color: var(--color-cod-gray);
+  
+  &::before {
+        background: #660000;
+    content: "🎃";
+    text-shadow: 0 0 4px black;
+  }
+}
+
+.button--text {
+  font-size: 10px;
+  
+  & em {
+    color: red;
+    font-family: cursive;
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0 4px 0 2px;
+  }
+  
+  &::before {
+        background: #006633;
+    content: "✡️";
+    text-shadow: 0 0 9px yellow;
+  }
+}
+
+.button--letter {
+  
+  font-size: 20px;
+  line-height: 1;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px #000000;
+  font-style: italic;
+  
+  &::before {
+        background: #003366;
+    content: "🌎";
+    text-shadow: 0 0 3px hsla(0deg, 0%, 100%, 0.5);
+    font-style: normal;
+  }
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        position: static;
+        transform: none;
+        margin: 20px auto;
+        width: fit-content;
+        padding: 0 20px;
+    }
+    
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Make buttons smaller on mobile */
+    .button--netscape {
+        zoom: .8;  /* Reset from 1.5 to normal size */
+        min-width: 70px;  /* Optional: make them even more compact */
+        font-size: 12px;  /* Optional: smaller text */
+    }
+}
+
+
