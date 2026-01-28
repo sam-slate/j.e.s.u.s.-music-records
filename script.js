@@ -125,27 +125,116 @@ document.addEventListener('DOMContentLoaded', function() {
 const audioPlayer = document.getElementById('audioPlayer');
 const albumArt = document.getElementById('albumArt');
 const trackTitle = document.getElementById('trackTitle');
+const progressBar = document.getElementById('progressBar');
+const progressContainer = document.querySelector('.progress-container');
+const currentTimeDisplay = document.getElementById('currentTime');
+const totalTimeDisplay = document.getElementById('totalTime');
 
 const playlist = [
     { 
         audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.wav', 
         cover: 'placeholder-cover-art.png',
-        title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION'
+        title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION',
+        lyricsFile: 'wwjs-lyrics.txt',
+        lyricsStartTime: 50,
+        lyricsEndTime: 180,
+        lyricsPauses: [
+            { startTime: 136, duration: 33 }
+        ]
     },
     { 
         audio: 'ana b\'choakh remix ! - ana b\'choke me march 2025 1.wav',
         cover: 'placeholder-cover-art.png',
-        title: 'Ana B\'choke Me'
+        title: 'Ana B\'choke Me',
+        lyricsFile: 'ana-lyrics.txt',
+        lyricsStartTime: 0,
+        lyricsEndTime: 150,
+        lyricsPauses: [
+            { startTime: 45, duration: 4 }
+        ]
     },
 ];
 
 let currentTrack = 0;
+
+// Format time in minutes:seconds
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Load lyrics from file
+async function loadLyrics(track) {
+    if (!track.lyricsFile) return;
+    
+    try {
+        const response = await fetch(track.lyricsFile);
+        const lyrics = await response.text();
+        
+        const lyricsContent = document.getElementById('lyricsContent');
+        lyricsContent.textContent = lyrics;
+        lyricsContent.style.top = '100%'; // Reset position
+    } catch (error) {
+        console.error('Error loading lyrics:', error);
+    }
+}
+
+// Update lyrics scroll position with pauses
+function updateLyricsScroll() {
+    const track = playlist[currentTrack];
+    if (!track.lyricsFile) return;
+    
+    const currentTime = audioPlayer.currentTime;
+    const lyricsContent = document.getElementById('lyricsContent');
+    
+    // Only scroll during the lyrics timeframe
+    if (currentTime < track.lyricsStartTime || currentTime > track.lyricsEndTime) {
+        return;
+    }
+    
+    // Calculate adjusted time accounting for pauses
+    let adjustedTime = currentTime - track.lyricsStartTime;
+    let totalPauseDuration = 0;
+    
+    if (track.lyricsPauses) {
+        for (const pause of track.lyricsPauses) {
+            const pauseStart = pause.startTime - track.lyricsStartTime;
+            const pauseEnd = pauseStart + pause.duration;
+            
+            // If we're currently in a pause, freeze the lyrics
+            if (adjustedTime >= pauseStart && adjustedTime < pauseEnd) {
+                adjustedTime = pauseStart;
+                break;
+            }
+            
+            // If we've passed this pause, subtract its duration from our position
+            if (adjustedTime >= pauseEnd) {
+                totalPauseDuration += pause.duration;
+            }
+        }
+    }
+    
+    // Subtract total pause time
+    adjustedTime -= totalPauseDuration;
+    
+    const lyricsDuration = track.lyricsEndTime - track.lyricsStartTime;
+    const progress = adjustedTime / lyricsDuration;
+    
+    // Calculate how far to scroll
+    const scrollDistance = 100 + (lyricsContent.offsetHeight / 4);
+    const currentPosition = 100 - (progress * scrollDistance);
+    
+    lyricsContent.style.top = currentPosition + '%';
+}
 
 function loadTrack(index) {
     audioPlayer.src = playlist[index].audio;
     albumArt.src = playlist[index].cover;
     trackTitle.textContent = playlist[index].title;
     currentTrack = index;
+    loadLyrics(playlist[index]);
 }
 
 document.getElementById('playBtn').addEventListener('click', () => {
@@ -185,6 +274,29 @@ audioPlayer.addEventListener('pause', () => {
 // Start rotation when playing
 audioPlayer.addEventListener('play', () => {
     albumArt.classList.add('rotating');
+});
+
+// Update progress bar, times, and lyrics as song plays
+audioPlayer.addEventListener('timeupdate', () => {
+    const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    progressBar.style.width = progress + '%';
+    currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+    totalTimeDisplay.textContent = formatTime(audioPlayer.duration);
+    updateLyricsScroll();
+});
+
+// Update total time when metadata loads
+audioPlayer.addEventListener('loadedmetadata', () => {
+    totalTimeDisplay.textContent = formatTime(audioPlayer.duration);
+});
+
+// Click on progress bar to seek
+progressContainer.addEventListener('click', (e) => {
+    const rect = progressContainer.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const percentage = clickX / width;
+    audioPlayer.currentTime = percentage * audioPlayer.duration;
 });
 
 // Load first track on page load

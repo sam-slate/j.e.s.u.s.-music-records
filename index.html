@@ -31,9 +31,6 @@
                     <div class="record-container">
                         <img src="placeholder-cover-art.png" alt="Album art" class="album-art" id="albumArt">
                     </div>
-                    <div class="track-info">
-                        <p id="trackTitle">WWJS - KLEZTRONICA TUNNEL 770 VERSION</p>
-                    </div>
                     <div class="player-controls">
                         <button class="control-btn" id="prevBtn">
                             <img src="prev.png" alt="Previous">
@@ -48,11 +45,22 @@
                             <img src="next.png" alt="Next">
                         </button>
                     </div>
+                    <div class="track-info">
+                        <p id="trackTitle">WWJS - KLEZTRONICA TUNNEL 770 VERSION</p>
+                    </div>
+                    
+                    <div class="progress-wrapper">
+                        <span class="time-display" id="currentTime">0:00</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <span class="time-display" id="totalTime">0:00</span>
+                    </div>
                 </div>
             </div>
         </div>
         <audio id="audioPlayer"></audio>
-        <div class="lyrics" >
+        <!-- <div class="lyrics" >
             <marquee class="lyrics-marquee" direction="up" scrolldelay="100" scrollamount="3">
                 <b>
                 What would Jesus Say <br/> 
@@ -100,6 +108,9 @@
                 </b>
 
             </marquee>
+        </div> -->
+        <div class="lyrics-display" id="lyricsDisplay">
+            <div class="lyrics-content" id="lyricsContent"></div>
         </div>
 
         <footer>

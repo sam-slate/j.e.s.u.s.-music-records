@@ -100,7 +100,7 @@ footer {
 .button-container {
     position: absolute;
     left: -180px;
-    top: 20px;
+    top: 60px;
     transform: none;
     display: flex;
     flex-direction: column;
@@ -110,7 +110,7 @@ footer {
 
 .content-wrapper {
     position: relative;
-    margin: 40px 0;
+    margin: 30px 0;
 }
 
 .premier-marquee{
@@ -325,7 +325,7 @@ footer {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 40px 0;
+    margin: -40px 0;
 }
 
 .turntable-container {
@@ -380,7 +380,7 @@ footer {
 
 .player-controls {
     position: absolute;
-    top: 65%;
+    top: 70%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -392,7 +392,7 @@ footer {
     background: transparent;
     border: none;
     cursor: pointer;
-    height: 60px;
+    height: 40px;
     padding: 0;
     transition: all 0.2s;
 }
@@ -433,4 +433,72 @@ footer {
         min-width: 70px;
         font-size: 12px;
     }
+}
+
+.progress-wrapper {
+    position: absolute;
+    bottom: 33%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-display {
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 35px;
+    text-align: center;
+}
+
+.progress-container {
+    flex: 1;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: chartreuse;
+    transition: width 0.1s linear;
+    border-radius: 4px;
+}
+
+.lyrics-display {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: 300px;
+    height: 500px;  /* Increased from 400px */
+    background-color: transparent;  /* Changed from rgba(0, 0, 0, 0.8) */
+    border: none;  /* Changed from 2px solid chartreuse */
+    overflow: hidden;
+    padding: 20px;
+    z-index: 500;
+}
+
+.lyrics-content {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    color: black;
+    font-size: 18px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    font-weight: 900;
+    text-shadow: 
+        -2px -2px 0 orange,
+        2px -2px 0 orange,
+        -2px 2px 0 orange,
+        2px 2px 0 orange,
+        -2px 0 0 orange,
+        2px 0 0 orange,
+        0 -2px 0 orange,
+        0 2px 0 orange;
 }
