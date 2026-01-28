@@ -26,10 +26,41 @@
                 <button class="button--netscape button--text" onclick="window.open('https://jewsforjesus.org/','_blank');" type="button">Repent <em>Now!</em></button>
             </div>
             <div class="turntable-wrapper">
-                <img src="turntable.gif" alt="Turntable" class="turntable">
+                <div class="turntable-container">
+                    <img src="turntable rectangle.png" alt="Turntable" class="turntable-base">
+                    <div class="record-container">
+                        <img src="placeholder-cover-art.png" alt="Album art" class="album-art" id="albumArt">
+                    </div>
+                    <div class="player-controls">
+                        <button class="control-btn" id="prevBtn">
+                            <img src="prev.png" alt="Previous">
+                        </button>
+                        <button class="control-btn" id="playBtn">
+                            <img src="play.png" alt="Play">
+                        </button>
+                        <button class="control-btn" id="pauseBtn">
+                            <img src="pause.png" alt="Pause">
+                        </button>
+                        <button class="control-btn" id="nextBtn">
+                            <img src="next.png" alt="Next">
+                        </button>
+                    </div>
+                    <div class="track-info">
+                        <p id="trackTitle">WWJS - KLEZTRONICA TUNNEL 770 VERSION</p>
+                    </div>
+                    
+                    <div class="progress-wrapper">
+                        <span class="time-display" id="currentTime">0:00</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <span class="time-display" id="totalTime">0:00</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="lyrics" >
+        <audio id="audioPlayer"></audio>
+        <!-- <div class="lyrics" >
             <marquee class="lyrics-marquee" direction="up" scrolldelay="100" scrollamount="3">
                 <b>
                 What would Jesus Say <br/> 
@@ -58,7 +89,7 @@
                 Put shabbat to use <br/> 
                 Manishevitz and some goose<br/> 
                 Sniff some poppers drink some juice<br/> 
-                Let your knows let you loose<br/><br/> 
+                Let your noses let you loose<br/><br/> 
 
                 when I'm coming wear that tallis like a like a prima<br/> 
                 joey got us banging on the banging on the bima<br/> 
@@ -73,10 +104,13 @@
                 Put shabbat to use <br/> 
                 Manishevitz and some goose<br/> 
                 Sniff some poppers drink some juice<br/> 
-                Let your noses  let you loose 
+                Let your noses let you loose 
                 </b>
 
             </marquee>
+        </div> -->
+        <div class="lyrics-display" id="lyricsDisplay">
+            <div class="lyrics-content" id="lyricsContent"></div>
         </div>
 
         <footer>
