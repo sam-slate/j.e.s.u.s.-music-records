@@ -83,19 +83,6 @@ h1 {
     letter-spacing: 0.1em;
 }
 
-.turntable-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 0;
-}
-
-.turntable {
-    max-width: 50vw;
-    width: 100%;
-    height: auto;
-}
-
 main {
     padding: 20px;
     line-height: 1.6;
@@ -112,15 +99,14 @@ footer {
 
 .button-container {
     position: absolute;
-    left: -180px;  /* Negative value to move them left of the turntable */
-    top: 20px;        /* Changed from 50vh to align with top of turntable */
-    transform: none;  /* Remove the translateY */
+    left: -180px;
+    top: 20px;
+    transform: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
     z-index: 100;
 }
-
 
 .content-wrapper {
     position: relative;
@@ -147,15 +133,15 @@ footer {
     bottom: 0;
     right: -80%;
     margin: 0;
-    z-index: 500;  /* Changed from 1000 */
+    z-index: 500;
     padding: 5px;
-    pointer-events: none;  /* Also add this so clicks pass through */
+    pointer-events: none;
 }
 
 .lyrics-marquee {
     width: 300px; 
     height: 100%;
-    pointer-events: auto;  /* Re-enable pointer events just for the marquee */
+    pointer-events: auto;
 }
 
 /* Pop-up ad styles */
@@ -214,7 +200,6 @@ footer {
 }
 
 :root {
-  /* Project Colors */
     --color-cod-gray: #111;
     --color-seashell: #f1f1f1;
     --color-silver: #ccc;
@@ -234,17 +219,6 @@ footer {
     --c-link: blue;
 }
 
-body {
-  box-sizing: border-box;
-  background-color: teal;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  gap: 1rem;
-}
-
 /* 90s Netscape button */
 .button--netscape {
     align-items: center;
@@ -261,62 +235,59 @@ body {
     padding: 2px 4px 2px 2px;
     position: relative;
     white-space: nowrap;
-  
-  /* Zoom */
-  zoom: 1.5;
-
-    &:hover,
-    &:focus {
-        outline: 1px dotted var(--c-link);
-    }
-
-    &:active {
-        border-color: var(--color-cod-gray) transparent transparent var(--color-cod-gray);
-    padding: 4px 2px 0px 4px;
-    }
-
-    &::before {
-        align-items: center;
-        background: var(--color-royal-blue);
-        content: "✡️";
-        display: flex;
-        flex: 0 0 24px;
-        font-size: 14px;
-        height: 23px;
-        justify-content: center;
-        line-height: 0;
-        margin-right: 4px;
-        overflow: hidden;
-        padding-top: 2px;
-        width: 24px;
-    }
+    zoom: 1.5;
 }
 
-.button--theme {
-  &::before {
+.button--netscape:hover,
+.button--netscape:focus {
+    outline: 1px dotted var(--c-link);
+}
+
+.button--netscape:active {
+    border-color: var(--color-cod-gray) transparent transparent var(--color-cod-gray);
+    padding: 4px 2px 0px 4px;
+}
+
+.button--netscape::before {
+    align-items: center;
+    background: var(--color-royal-blue);
+    content: "✡️";
+    display: flex;
+    flex: 0 0 24px;
+    font-size: 14px;
+    height: 23px;
+    justify-content: center;
+    line-height: 0;
+    margin-right: 4px;
+    overflow: hidden;
+    padding-top: 2px;
+    width: 24px;
+}
+
+.button--theme::before {
     background: var(--color-cod-gray);
     content: "💡";
     text-shadow: 0 0 4px #FF6;
-  }
 }
 
 .button--dark {
-  background: var(--color-cod-gray);
-  color: red;
+    background: var(--color-cod-gray);
+    color: red;
     border-top-color: var(--color-cod-gray);
-  border-left-color: var(--color-cod-gray);
-  
-  &::before {
-        background: #660000;
+    border-left-color: var(--color-cod-gray);
+}
+
+.button--dark::before {
+    background: #660000;
     content: "🎃";
     text-shadow: 0 0 4px black;
-  }
 }
 
 .button--text {
-  font-size: 10px;
-  
-  & em {
+    font-size: 10px;
+}
+
+.button--text em {
     color: red;
     font-family: cursive;
     display: block;
@@ -324,32 +295,124 @@ body {
     font-size: 20px;
     line-height: 1;
     padding: 0 4px 0 2px;
-  }
-  
-  &::before {
-        background: #006633;
+}
+
+.button--text::before {
+    background: #006633;
     content: "✡️";
     text-shadow: 0 0 9px yellow;
-  }
 }
 
 .button--letter {
-  
-  font-size: 20px;
-  line-height: 1;
-  font-weight: bold;
-  color: white;
-  text-shadow: 1px 1px #000000;
-  font-style: italic;
-  
-  &::before {
-        background: #003366;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px #000000;
+    font-style: italic;
+}
+
+.button--letter::before {
+    background: #003366;
     content: "🌎";
     text-shadow: 0 0 3px hsla(0deg, 0%, 100%, 0.5);
     font-style: normal;
-  }
 }
 
+/* Turntable styles */
+.turntable-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px 0;
+}
+
+.turntable-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+.turntable-base {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.record-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+}
+
+.album-art {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    animation-play-state: paused;
+}
+
+.album-art.rotating {
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.track-info {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+}
+
+.player-controls {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.control-btn img {
+    height: 100%;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+/* Mobile styles */
 @media (max-width: 768px) {
     .button-container {
         position: static;
@@ -365,10 +428,9 @@ body {
         align-items: center;
     }
     
-    /* Make buttons smaller on mobile */
     .button--netscape {
-        zoom: .8;  /* Reset from 1.5 to normal size */
-        min-width: 70px;  /* Optional: make them even more compact */
-        font-size: 12px;  /* Optional: smaller text */
+        zoom: .8;
+        min-width: 70px;
+        font-size: 12px;
     }
 }

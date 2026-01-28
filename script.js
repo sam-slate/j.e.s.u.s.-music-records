@@ -3,11 +3,13 @@
 window.addEventListener('load', function() {
     console.log('J.E.S.U.S. Music Records site loaded!');
 });
+
 if (window.innerWidth <= 768) {
     window.addEventListener('load', function() {
         alert('We here at J.E.S.U.S. Music Records believe in mobile-last development. You might want to use a desktop computer, ideally an iMac G4.');
     });
 }
+
 // Add some retro interactivity
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scroll for navigation links
@@ -22,13 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
     // Pop-up ads functionality
     const images = ['image1.png', 'image2.jpeg', 'image3.png', 'image4.jpeg', 'image5.jpg'];
     let popupCount = 0;
     const maxPopups = images.length;
+    
     function makeDraggable(element) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         element.onmousedown = dragMouseDown;
+        
         function dragMouseDown(e) {
             // Don't drag if clicking the close button
             if (e.target.classList.contains('close-btn')) {
@@ -41,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.onmousemove = elementDrag;
             element.style.cursor = 'grabbing';
         }
+        
         function elementDrag(e) {
             e.preventDefault();
             pos1 = pos3 - e.clientX;
@@ -50,44 +56,57 @@ document.addEventListener('DOMContentLoaded', function() {
             element.style.top = (element.offsetTop - pos2) + "px";
             element.style.left = (element.offsetLeft - pos1) + "px";
         }
+        
         function closeDragElement() {
             document.onmouseup = null;
             document.onmousemove = null;
             element.style.cursor = 'grab';
         }
     }
+    
     function createPopup() {
         if (popupCount >= maxPopups) {
             return;
         }
+        
         const popup = document.createElement('div');
         popup.className = 'popup-ad';
+        
         // Random position
         const maxX = window.innerWidth - 350;
         const maxY = window.innerHeight - 300;
         const randomX = Math.max(50, Math.random() * maxX);
         const randomY = Math.max(100, Math.random() * maxY);
+        
         popup.style.left = randomX + 'px';
         popup.style.top = randomY + 'px';
+        
         // Get random image
         const randomImage = images[Math.floor(Math.random() * images.length)];
+        
         popup.innerHTML = `
             <button class="close-btn">×</button>
             <img src="${randomImage}" alt="Pop-up ad">
         `;
+        
         document.body.appendChild(popup);
+        
         // Close button functionality
         popup.querySelector('.close-btn').addEventListener('click', function() {
             popup.remove();
         });
+        
         // Make draggable
         makeDraggable(popup);
+        
         // Animate in
         setTimeout(() => {
             popup.classList.add('show');
         }, 10);
+        
         popupCount++;
     }
+    
     // Show first popup after 10 seconds, then every 10 seconds
     let popupInterval;
     setTimeout(function() {
@@ -101,3 +120,72 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10000);
     }, 10000);
 });
+
+// Music player setup
+const audioPlayer = document.getElementById('audioPlayer');
+const albumArt = document.getElementById('albumArt');
+const trackTitle = document.getElementById('trackTitle');
+
+const playlist = [
+    { 
+        audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.wav', 
+        cover: 'placeholder-cover-art.png',
+        title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION'
+    },
+    { 
+        audio: 'ana b\'choakh remix ! - ana b\'choke me march 2025 1.wav',
+        cover: 'placeholder-cover-art.png',
+        title: 'Ana B\'choke Me'
+    },
+];
+
+let currentTrack = 0;
+
+function loadTrack(index) {
+    audioPlayer.src = playlist[index].audio;
+    albumArt.src = playlist[index].cover;
+    trackTitle.textContent = playlist[index].title;
+    currentTrack = index;
+}
+
+document.getElementById('playBtn').addEventListener('click', () => {
+    audioPlayer.play();
+    albumArt.classList.add('rotating');
+});
+
+document.getElementById('pauseBtn').addEventListener('click', () => {
+    audioPlayer.pause();
+    albumArt.classList.remove('rotating');
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+    loadTrack(currentTrack);
+    audioPlayer.play();
+    albumArt.classList.add('rotating');
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+    currentTrack = (currentTrack + 1) % playlist.length;
+    loadTrack(currentTrack);
+    audioPlayer.play();
+    albumArt.classList.add('rotating');
+});
+
+// Auto-advance to next track when song ends
+audioPlayer.addEventListener('ended', () => {
+    document.getElementById('nextBtn').click();
+});
+
+// Stop rotation when paused
+audioPlayer.addEventListener('pause', () => {
+    albumArt.classList.remove('rotating');
+});
+
+// Start rotation when playing
+audioPlayer.addEventListener('play', () => {
+    albumArt.classList.add('rotating');
+});
+
+// Load first track on page load
+loadTrack(0);
