@@ -248,8 +248,14 @@ document.getElementById('pauseBtn').addEventListener('click', () => {
 });
 
 document.getElementById('prevBtn').addEventListener('click', () => {
-    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-    loadTrack(currentTrack);
+    // If more than 3 seconds into the song, restart it
+    // Otherwise, go to previous track
+    if (audioPlayer.currentTime > 3) {
+        audioPlayer.currentTime = 0;
+    } else {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrack);
+    }
     audioPlayer.play();
     albumArt.classList.add('rotating');
 });
