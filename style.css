@@ -42,13 +42,19 @@ header {
     pointer-events: none;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
+@keyframes spin3d {
+    0% {
+        transform: rotateY(0deg);
     }
-    50% {
-        transform: scale(1.1);
+    100% {
+        transform: rotateY(360deg);
     }
+}
+
+.menorah {
+    max-width: 10vw;
+    height: auto;
+    animation: spin3d 3s linear infinite;  /* Changed from pulse */
 }
 
 .logo {
@@ -57,11 +63,6 @@ header {
     display: block;
 }
 
-.menorah {
-    max-width: 10vw;
-    height: auto;
-    animation: pulse 2s ease-in-out infinite;
-}
 
 .menorah-left {
     position: absolute;
@@ -142,6 +143,25 @@ footer {
     width: 300px; 
     height: 100%;
     pointer-events: auto;
+}
+
+/* Static lyrics display */
+.lyrics-display.static-lyrics {
+    top: 50%;
+    transform: translateY(-50%);
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.lyrics-display.static-lyrics .lyrics-content {
+    position: static;
+    transform: none;
+}
+
+/* Hide lyrics when display is none */
+.lyrics-display.no-lyrics {
+    display: none;
 }
 
 /* Pop-up ad styles */
@@ -501,4 +521,135 @@ footer {
         2px 0 0 white,
         0 -2px 0 white,
         0 2px 0 white;
+}
+
+/* Dance mode styles */
+body.dance-mode {
+    background-image: url('jesusflashing.gif');
+    background-repeat: repeat;
+    background-size: 200px 200px;  /* Adjust size as needed */
+    animation: none;  /* Remove the color flash animation */
+}
+
+@keyframes backgroundFlash {
+    0% {
+        background-color: #ff00ff;
+    }
+    25% {
+        background-color: #00ffff;
+    }
+    50% {
+        background-color: #ffff00;
+    }
+    75% {
+        background-color: #ff00ff;
+    }
+    100% {
+        background-color: #00ff00;
+    }
+}
+
+body.dance-mode .container {
+    animation: shake 0.2s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px) rotate(-1deg);
+    }
+    75% {
+        transform: translateX(5px) rotate(1deg);
+    }
+}
+
+body.dance-mode .logo {
+    animation: spin3d 1s linear infinite, colorCycle 2s linear infinite;
+}
+
+@keyframes colorCycle {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+body.dance-mode .menorah {
+    animation: spin3d 0.5s linear infinite, pulse 0.3s ease-in-out infinite;
+}
+
+body.dance-mode .turntable-container {
+    animation: bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}/* Dance mode styles */
+body.dance-mode {
+    animation: backgroundFlash 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundFlash {
+    0% {
+        background-color: #ff00ff;
+    }
+    25% {
+        background-color: #00ffff;
+    }
+    50% {
+        background-color: #ffff00;
+    }
+    75% {
+        background-color: #ff00ff;
+    }
+    100% {
+        background-color: #00ff00;
+    }
+}
+
+body.dance-mode .container {
+    animation: shake 0.2s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px) rotate(-1deg);
+    }
+    75% {
+        transform: translateX(5px) rotate(1deg);
+    }
+}
+
+body.dance-mode .logo {
+    animation: spin3d 1s linear infinite, colorCycle 2s linear infinite;
+}
+
+@keyframes colorCycle {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+body.dance-mode .menorah {
+    animation: spin3d 0.5s linear infinite, pulse 0.3s ease-in-out infinite;
+}
+
+body.dance-mode .turntable-container {
+    animation: bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
