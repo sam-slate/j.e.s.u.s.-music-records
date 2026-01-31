@@ -136,10 +136,14 @@ const playlist = [
         cover: 'placeholder-cover-art.png',
         title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION',
         lyricsFile: 'wwjs-lyrics.txt',
+        lyricsDisplay: 'scrolling',  // Add this line
         lyricsStartTime: 50,
         lyricsEndTime: 180,
         lyricsPauses: [
             { startTime: 136, duration: 33 }
+        ],
+        danceModes: [
+            { startTime: 169, endTime: 200 }
         ]
     },
     { 
@@ -147,10 +151,11 @@ const playlist = [
         cover: 'placeholder-cover-art.png',
         title: 'Ana B\'choke Me',
         lyricsFile: 'ana-lyrics.txt',
+        lyricsDisplay: 'static',  // Add this line - change to 'static' or 'none' if needed
         lyricsStartTime: 0,
         lyricsEndTime: 150,
-        lyricsPauses: [
-            { startTime: 45, duration: 4 }
+        danceModes: [
+            { startTime: 55.5, endTime: 83}
         ]
     },
 ];
@@ -167,24 +172,66 @@ function formatTime(seconds) {
 
 // Load lyrics from file
 async function loadLyrics(track) {
-    if (!track.lyricsFile) return;
+    const lyricsDisplay = document.getElementById('lyricsDisplay');
+    const lyricsContent = document.getElementById('lyricsContent');
+    
+    // Handle no lyrics
+    if (!track.lyricsFile || track.lyricsDisplay === 'none') {
+        lyricsDisplay.classList.add('no-lyrics');
+        lyricsDisplay.classList.remove('static-lyrics');
+        return;
+    }
+    
+    // Remove no-lyrics class
+    lyricsDisplay.classList.remove('no-lyrics');
+    
+    // Set static or scrolling mode
+    if (track.lyricsDisplay === 'static') {
+        lyricsDisplay.classList.add('static-lyrics');
+    } else {
+        lyricsDisplay.classList.remove('static-lyrics');
+    }
     
     try {
         const response = await fetch(track.lyricsFile);
         const lyrics = await response.text();
         
-        const lyricsContent = document.getElementById('lyricsContent');
         lyricsContent.textContent = lyrics;
-        lyricsContent.style.top = '100%'; // Reset position
+        lyricsContent.style.top = track.lyricsDisplay === 'static' ? '0' : '100%'; // Reset position
     } catch (error) {
         console.error('Error loading lyrics:', error);
+    }
+}
+
+// Check if we're in a dance mode section
+function checkDanceMode() {
+    const track = playlist[currentTrack];
+    if (!track.danceModes) return;
+    
+    const currentTime = audioPlayer.currentTime;
+    let inDanceMode = false;
+    
+    for (const danceSection of track.danceModes) {
+        if (currentTime >= danceSection.startTime && currentTime <= danceSection.endTime) {
+            inDanceMode = true;
+            break;
+        }
+    }
+    
+    // Toggle dance mode class
+    if (inDanceMode) {
+        document.body.classList.add('dance-mode');
+    } else {
+        document.body.classList.remove('dance-mode');
     }
 }
 
 // Update lyrics scroll position with pauses
 function updateLyricsScroll() {
     const track = playlist[currentTrack];
-    if (!track.lyricsFile) return;
+    
+    // Don't scroll if static or no lyrics
+    if (!track.lyricsFile || track.lyricsDisplay !== 'scrolling') return;
     
     const currentTime = audioPlayer.currentTime;
     const lyricsContent = document.getElementById('lyricsContent');
@@ -275,11 +322,12 @@ audioPlayer.addEventListener('ended', () => {
 // Stop rotation when paused
 audioPlayer.addEventListener('pause', () => {
     albumArt.classList.remove('rotating');
+    document.body.classList.remove('dance-mode');  // Stop dance mode when paused
 });
 
-// Start rotation when playing
 audioPlayer.addEventListener('play', () => {
     albumArt.classList.add('rotating');
+    checkDanceMode();  // Resume dance mode check when playing
 });
 
 // Update progress bar, times, and lyrics as song plays
@@ -289,6 +337,11 @@ audioPlayer.addEventListener('timeupdate', () => {
     currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
     totalTimeDisplay.textContent = formatTime(audioPlayer.duration);
     updateLyricsScroll();
+
+    // Only check dance mode if playing
+    if (!audioPlayer.paused) {
+        checkDanceMode();
+    }
 });
 
 // Update total time when metadata loads
