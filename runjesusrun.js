@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const jesus = document.getElementById('jesus');
     const chasers = document.querySelectorAll('.jewish-person');
+    const gameAudio = document.getElementById('gameAudio');
     
     if (!jesus) return;
     
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const moveSpeed = 3;
     const chaserSpeed = 1;
     let gameOver = false;
+    let audioStarted = false;
     
     // Initialize chasers at random positions with wander direction
     const chaserPositions = [];
@@ -19,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         chaserPositions.push({ 
             x, 
             y,
-            wanderAngle: Math.random() * Math.PI * 2, // Random starting angle
-            wanderSpeed: 0.05 // How quickly they change direction
+            wanderAngle: Math.random() * Math.PI * 2,
+            wanderSpeed: 0.05
         });
         chaser.style.left = x + 'px';
         chaser.style.top = y + 'px';
@@ -37,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
     jesus.style.top = jesusY + 'px';
     
     document.addEventListener('keydown', function(e) {
+        // Start audio on first keypress
+        if (!audioStarted && gameAudio) {
+            gameAudio.play().catch(err => console.log('Audio play failed:', err));
+            audioStarted = true;
+        }
+        
         if(keys.hasOwnProperty(e.key)) {
             e.preventDefault();
             keys[e.key] = true;
@@ -174,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pos.wanderAngle += (Math.random() - 0.5) * pos.wanderSpeed;
                 
                 // Calculate wander offset using smooth angle
-                const wanderStrength = 0.5; // Reduced from 3
+                const wanderStrength = 0.5;
                 const wanderX = Math.cos(pos.wanderAngle) * wanderStrength;
                 const wanderY = Math.sin(pos.wanderAngle) * wanderStrength;
                 

@@ -132,7 +132,7 @@ const totalTimeDisplay = document.getElementById('totalTime');
 
 const playlist = [
     { 
-        audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.wav', 
+        audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.mp3', 
         cover: 'placeholder-cover-art.png',
         title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION',
         lyricsFile: 'wwjs-lyrics.txt',
@@ -147,7 +147,7 @@ const playlist = [
         ]
     },
     { 
-        audio: 'ana b\'choakh remix ! - ana b\'choke me march 2025 1.wav',
+        audio: 'ana bchoakh remix ! - ana bchoke me march 2025 1.mp3',
         cover: 'placeholder-cover-art.png',
         title: 'Ana B\'choke Me',
         lyricsFile: 'ana-lyrics.txt',
