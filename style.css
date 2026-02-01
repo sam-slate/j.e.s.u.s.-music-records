@@ -698,11 +698,30 @@ body.dance-mode .turntable-container {
 
 .dress-up-content {
     max-width: 100%;
-    margin: 10px auto;
-    padding: 10px;
+    margin: 0;  /* Changed from 10px auto */
+    padding: 5px;  /* Changed from 10px */
     text-align: center;
     position: relative;
-    min-height: 80vh;
+    min-height: 0;  /* Changed from 80vh */
+    height: 100vh;  /* Add this to constrain height */
+    overflow: hidden;  /* Add this to prevent scroll */
+}
+
+.dress-up-title {
+    max-width: 300px;  /* Made smaller from 400px */
+    height: auto;
+    display: block;
+    margin: 0 auto 5px auto;  /* Reduced bottom margin */
+    image-rendering: pixelated;
+}
+
+.dress-up-container {
+    position: absolute;
+    left: 50%;
+    top: 40%;  /* Adjust this value to position Jesus */
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    z-index: 1;
 }
 
 .dress-up-content h2 {
@@ -710,13 +729,6 @@ body.dance-mode .turntable-container {
     margin-bottom: 10px;
 }
 
-.dress-up-title {
-    max-width: 400px;
-    height: auto;
-    display: block;
-    margin: 0 auto 10px auto;
-    image-rendering: pixelated;
-}
 
 #jesus-body {
     display: block;
@@ -729,35 +741,26 @@ body.dance-mode .turntable-container {
 
 .clothing-rack {
     position: fixed;
-    top: 100px;
+    top: 200px;
     left: 20px;
     width: auto;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 100;  /* Add this */
-}
-
-.clothing-rack-right {
-    position: fixed;
-    top: 100px;
-    right: 50px;  /* Changed from 20px - more space from edge */
-    width: auto;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
+    max-width: 400px;  /* Increased to fit multiple columns */
+    display: grid;  /* Changed from flex */
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns */
     gap: 10px;
     z-index: 100;
 }
 
-.dress-up-container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: inline-block;
-    z-index: 1;  /* Add this - lower than clothing racks */
+.clothing-rack-right {
+    position: fixed;
+    top: 200px;
+    right: 20px;
+    width: auto;
+    max-width: 400px;  /* Increased to fit multiple columns */
+    display: grid;  /* Changed from flex */
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns */
+    gap: 10px;
+    z-index: 100;
 }
 
 .clothing-item {
@@ -803,3 +806,9 @@ body.dance-mode .turntable-container {
     height: 100%;
     image-rendering: pixelated;
 }
+
+body.dress-up-page {
+    overflow: hidden;
+    height: 100vh;
+}
+

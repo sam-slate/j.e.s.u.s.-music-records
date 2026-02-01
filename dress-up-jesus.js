@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const clothingRackLeft = document.getElementById('clothingRackLeft');
     const clothingRackRight = document.getElementById('clothingRackRight');
     const clothingLayers = document.getElementById('clothing-layers');
+
+    let highestZIndex = 1000; // Add this at the top with the other variables
+
     
     if (!jesusBody) return;
     
@@ -14,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         shirt: 150,
         pants: 200,
         hat: 50,
-        shoes: 40
+        shoes: 100
     };
     
     // List all your clothing items here
@@ -24,7 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
         { file: 'jacket3.png', type: 'short_jacket' },
         { file: 'shirt1.png', type: 'shirt' },
         { file: 'pants1.png', type: 'pants' },
-        { file: 'pants2.png', type: 'pants' }
+        { file: 'pants2.png', type: 'pants' },
+        { file: 'salomon1.png', type: 'shoes' },
+        { file: 'salomon2.png', type: 'shoes' },
+        { file: 'salomon3.png', type: 'shoes' }
+
     ];
     
     let draggedElement = null;
@@ -71,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         thumbnail.addEventListener('mousedown', startDrag);
     });
     
+
     function startDrag(e) {
         draggedElement = e.target;
         
@@ -83,13 +91,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentHeight = draggedElement.offsetHeight;
         const currentWidth = draggedElement.offsetWidth;
         
+        // Increment z-index to bring to front
+        highestZIndex++;
+        
         // Make it draggable
         draggedElement.classList.add('dragging');
         draggedElement.style.position = 'fixed';
-        draggedElement.style.height = currentHeight + 'px';  // Preserve height
-        draggedElement.style.width = currentWidth + 'px';    // Preserve width
+        draggedElement.style.height = currentHeight + 'px';
+        draggedElement.style.width = currentWidth + 'px';
         draggedElement.style.left = (e.clientX - offsetX) + 'px';
         draggedElement.style.top = (e.clientY - offsetY) + 'px';
+        draggedElement.style.zIndex = highestZIndex;
         
         document.addEventListener('mousemove', drag);
         document.addEventListener('mouseup', stopDrag);
@@ -114,3 +126,4 @@ document.addEventListener('DOMContentLoaded', function() {
         draggedElement = null;
     }
 });
+
