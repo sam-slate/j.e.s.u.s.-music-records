@@ -812,3 +812,118 @@ body.dress-up-page {
     height: 100vh;
 }
 
+.request-form {
+    max-width: 500px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 0;
+    font-family: 'Aldrich', 'Arial', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.request-form .button--netscape {
+    margin-top: 10px;
+}
+
+body.request-page {
+    background-image: url('panera1.jpeg');
+}
+
+.request-page .page-content {
+    background-color: rgba(255, 255, 255, 0.9);  /* White with 90% opacity */
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.request-page .page-content h2 {
+    margin-top: 0;
+}
+
+.rider-link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.rider-link a {
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.rider-link a:hover {
+    color: darkblue;
+}
+
+.menorah-container a {
+    pointer-events: auto;
+}
+
+.style-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.style-btn {
+    padding: 10px 20px;
+    font-family: 'Aldrich', 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ccc;
+    border: 3px solid #000;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.style-btn:hover {
+    background-color: #aaa;
+}
+
+.style-btn.active {
+    background-color: chartreuse;
+    border-color: #000;
+    transform: scale(1.1);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #000;
+}

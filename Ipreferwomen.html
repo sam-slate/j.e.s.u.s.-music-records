@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Prefer Women</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .mary-collage {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .mary-gif {
+            position: absolute;
+            image-rendering: auto;
+        }
+
+        .mary-text {
+            position: absolute;
+            color: black;
+            font-weight: 300;
+            pointer-events: none;
+            transition: all 1s ease-out;
+        }
+
+        /* Shuffled layout with varying sizes, minimal overlap */
+        .mary-gif:nth-child(1) { width: 28%; top: 0%; left: 0%; z-index: 2; }
+        .mary-gif:nth-child(2) { width: 22%; top: 0%; left: 26%; z-index: 1; }
+        .mary-gif:nth-child(3) { width: 20%; top: 0%; left: 46%; z-index: 3; }
+        .mary-gif:nth-child(4) { width: 24%; top: 0%; left: 64%; z-index: 2; }
+        .mary-gif:nth-child(5) { width: 18%; top: 0%; left: 86%; z-index: 1; }
+        
+        .mary-gif:nth-child(6) { width: 21%; top: 25%; left: 0%; z-index: 3; }
+        .mary-gif:nth-child(7) { width: 25%; top: 25%; left: 19%; z-index: 2; }
+        .mary-gif:nth-child(8) { width: 23%; top: 25%; left: 42%; z-index: 1; }
+        .mary-gif:nth-child(9) { width: 19%; top: 25%; left: 63%; z-index: 3; }
+        .mary-gif:nth-child(10) { width: 22%; top: 25%; left: 80%; z-index: 2; }
+        
+        .mary-gif:nth-child(11) { width: 26%; top: 50%; left: 0%; z-index: 1; }
+        .mary-gif:nth-child(12) { width: 20%; top: 50%; left: 24%; z-index: 3; }
+        .mary-gif:nth-child(13) { width: 24%; top: 50%; left: 42%; z-index: 2; }
+        .mary-gif:nth-child(14) { width: 21%; top: 50%; left: 64%; z-index: 1; }
+        .mary-gif:nth-child(15) { width: 18%; top: 50%; left: 83%; z-index: 3; }
+        
+        .mary-gif:nth-child(16) { width: 23%; top: 75%; left: 0%; z-index: 2; }
+        .mary-gif:nth-child(17) { width: 27%; top: 75%; left: 21%; z-index: 1; }
+        .mary-gif:nth-child(18) { width: 19%; top: 75%; left: 46%; z-index: 3; }
+        .mary-gif:nth-child(19) { width: 22%; top: 75%; left: 63%; z-index: 2; }
+        .mary-gif:nth-child(20) { width: 20%; top: 75%; left: 83%; z-index: 1; }
+        
+        /* Extra gifs to fill gaps */
+        .mary-gif:nth-child(21) { width: 16%; top: 8%; left: 50%; z-index: 4; }
+        .mary-gif:nth-child(22) { width: 15%; top: 33%; left: 5%; z-index: 4; }
+        .mary-gif:nth-child(23) { width: 17%; top: 58%; left: 70%; z-index: 4; }
+        .mary-gif:nth-child(24) { width: 16%; top: 83%; left: 40%; z-index: 4; }
+        .mary-gif:nth-child(25) { width: 15%; top: 15%; left: 72%; z-index: 4; }
+        .mary-gif:nth-child(26) { width: 16%; top: 40%; left: 85%; z-index: 4; }
+        .mary-gif:nth-child(27) { width: 17%; top: 65%; left: 12%; z-index: 4; }
+        .mary-gif:nth-child(28) { width: 15%; top: 90%; left: 58%; z-index: 4; }
+    </style>
+</head>
+<body>
+    <div class="mary-collage" id="collage">
+        <img src="marygif12.gif" alt="Mary" class="mary-gif">
+        <img src="marygif5.gif" alt="Mary" class="mary-gif">
+        <img src="marygif17.gif" alt="Mary" class="mary-gif">
+        <img src="marygif3.gif" alt="Mary" class="mary-gif">
+        <img src="marygif9.gif" alt="Mary" class="mary-gif">
+        <img src="marygif14.gif" alt="Mary" class="mary-gif">
+        <img src="marygif1.gif" alt="Mary" class="mary-gif">
+        <img src="marygif18.gif" alt="Mary" class="mary-gif">
+        <img src="marygif7.gif" alt="Mary" class="mary-gif">
+        <img src="marygif11.gif" alt="Mary" class="mary-gif">
+        <img src="marygif4.gif" alt="Mary" class="mary-gif">
+        <img src="marygif16.gif" alt="Mary" class="mary-gif">
+        <img src="marygif8.gif" alt="Mary" class="mary-gif">
+        <img src="marygif2.gif" alt="Mary" class="mary-gif">
+        <img src="marygif13.gif" alt="Mary" class="mary-gif">
+        <img src="marygif6.gif" alt="Mary" class="mary-gif">
+        <img src="marygif15.gif" alt="Mary" class="mary-gif">
+        <img src="marygif10.gif" alt="Mary" class="mary-gif">
+        <img src="marygif7.gif" alt="Mary" class="mary-gif">
+        <img src="marygif3.gif" alt="Mary" class="mary-gif">
+        <img src="marygif14.gif" alt="Mary" class="mary-gif">
+        <img src="marygif1.gif" alt="Mary" class="mary-gif">
+        <img src="marygif18.gif" alt="Mary" class="mary-gif">
+        <img src="marygif9.gif" alt="Mary" class="mary-gif">
+        <img src="marygif12.gif" alt="Mary" class="mary-gif">
+        <img src="marygif5.gif" alt="Mary" class="mary-gif">
+        <img src="marygif16.gif" alt="Mary" class="mary-gif">
+        <img src="marygif11.gif" alt="Mary" class="mary-gif">
+    </div>
+
+    <script>
+        const collage = document.getElementById('collage');
+        const fonts = [
+            'serif',
+            "'Times New Roman', serif",
+            'cursive',
+            'Georgia, serif',
+            "'Brush Script MT', cursive",
+            "'Palatino', serif",
+            'cursive',
+            "'Zapf Chancery', cursive",
+            "'Garamond', serif",
+            "'Baskerville', serif",
+            'cursive',
+            "'Didot', serif",
+            "'Lucida Handwriting', cursive"
+        ];
+
+        document.addEventListener('click', (e) => {
+            const numberOfMarys = 50; // Number of "Mary" texts to explode
+            
+            for (let i = 0; i < numberOfMarys; i++) {
+                const mary = document.createElement('div');
+                mary.className = 'mary-text';
+                mary.textContent = 'Mary';
+                
+                // Random font
+                mary.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+                
+                // Random size
+                mary.style.fontSize = (10 + Math.random() * 10) + 'px';  // Changed from (40 + Math.random() * 80)                
+                // Start at click position
+                mary.style.left = e.clientX + 'px';
+                mary.style.top = e.clientY + 'px';
+                mary.style.zIndex = '100';
+                
+                collage.appendChild(mary);
+                
+                // Explode in random direction
+                setTimeout(() => {
+                    const angle = (Math.random() * 360) * (Math.PI / 180);
+                    const distance = 40 + Math.random() * 300;
+                    const x = e.clientX + Math.cos(angle) * distance;
+                    const y = e.clientY + Math.sin(angle) * distance;
+                    
+                    mary.style.left = x + 'px';
+                    mary.style.top = y + 'px';
+                    mary.style.opacity = '0';
+                }, 10);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    mary.remove();
+                }, 1100);
+            }
+        });
+    </script>
+</body>
+</html>
