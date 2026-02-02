@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕎 JEWISH HYPE ZONE 🕎</title>
+    <style>
+        @keyframes rainbow {
+            0% { background-color: #ff0000; }
+            14% { background-color: #ff7f00; }
+            28% { background-color: #ffff00; }
+            42% { background-color: #00ff00; }
+            57% { background-color: #0000ff; }
+            71% { background-color: #4b0082; }
+            85% { background-color: #9400d3; }
+            100% { background-color: #ff0000; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            75% { transform: translateY(20px) translateX(-10px); }
+        }
+
+        @keyframes flash {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            animation: rainbow 3s linear infinite;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .hype-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 80px;
+            user-select: none;
+        }
+
+        .spin { animation: spin 2s linear infinite; }
+        .bounce { animation: bounce 1s ease-in-out infinite; }
+        .shake { animation: shake 0.5s ease-in-out infinite; }
+        .pulse { animation: pulse 1.5s ease-in-out infinite; }
+        .wiggle { animation: wiggle 0.8s ease-in-out infinite; }
+        .float { animation: float 3s ease-in-out infinite; }
+        .flash { animation: flash 1s linear infinite; }
+
+        .giant-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            font-weight: bold;
+            color: gold;
+            text-shadow: 
+                -3px -3px 0 #000,
+                3px -3px 0 #000,
+                -3px 3px 0 #000,
+                3px 3px 0 #000,
+                0 0 20px #fff,
+                0 0 40px #fff,
+                0 0 60px #00f;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 1000;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .firework {
+            position: absolute;
+            font-size: 40px;
+            animation: firework 2s ease-out infinite;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .marquee-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(90deg, blue, purple, blue);
+            padding: 10px 0;
+            font-size: 30px;
+            font-weight: bold;
+            color: yellow;
+            text-shadow: 2px 2px 4px #000;
+            z-index: 2000;
+        }
+
+        .corner-emoji {
+            position: fixed;
+            font-size: 100px;
+            z-index: 999;
+        }
+
+        .top-left { top: 10px; left: 10px; animation: wiggle 1s ease-in-out infinite; }
+        .top-right { top: 10px; right: 10px; animation: spin 3s linear infinite; }
+        .bottom-left { bottom: 80px; left: 10px; animation: bounce 1.5s ease-in-out infinite; }
+        .bottom-right { bottom: 80px; right: 10px; animation: pulse 2s ease-in-out infinite; }
+
+        .star-of-david {
+            position: absolute;
+            font-size: 150px;
+            animation: spin 4s linear infinite, float 3s ease-in-out infinite;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="hype-container" id="hypeContainer">
+        <div class="giant-text">🕎 JUDAISM 🕎</div>
+        
+        <!-- Corner emojis -->
+        <div class="corner-emoji top-left">🕎</div>
+        <div class="corner-emoji top-right">✡️</div>
+        <div class="corner-emoji bottom-left">📖</div>
+        <div class="corner-emoji bottom-right">🕯️</div>
+
+        <!-- Star of David -->
+        <div class="star-of-david" style="top: 20%; left: 10%;">✡️</div>
+        <div class="star-of-david" style="top: 30%; right: 15%;">✡️</div>
+        <div class="star-of-david" style="bottom: 25%; left: 20%;">✡️</div>
+    </div>
+
+    <div class="marquee-container">
+        <marquee scrollamount="15">🕎 MAZEL TOV! ✡️ L'CHAIM! 🍷 SHABBAT SHALOM! 🕯️ OY VEY! 📚 BARUCH HASHEM! 🕎 MAZEL TOV! ✡️ L'CHAIM! 🍷 SHABBAT SHALOM! 🕯️</marquee>
+    </div>
+
+    <script>
+        const emojis = ['🕎', '✡️', '📖', '🕯️', '🍷', '🥖', '🫓', '🧈', '🍯', '🐟']        
+        const animations = ['spin', 'bounce', 'shake', 'pulse', 'wiggle', 'float', 'flash'];
+        const container = document.getElementById('hypeContainer');
+
+        // Create random floating emojis
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji ' + animations[Math.floor(Math.random() * animations.length)];
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 90 + '%';
+            emoji.style.top = Math.random() * 80 + '%';
+            emoji.style.fontSize = (Math.random() * 60 + 40) + 'px';
+            emoji.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(emoji);
+        }
+
+        // Create fireworks
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.textContent = '✡️';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = Math.random() * 100 + '%';
+            firework.style.animationDelay = Math.random() + 's';
+            container.appendChild(firework);
+            
+            setTimeout(() => firework.remove(), 2000);
+        }
+
+        // Generate initial emojis
+        for (let i = 0; i < 50; i++) {
+            createEmoji();
+        }
+
+        // Continuous fireworks
+        setInterval(createFirework, 300);
+
+        // Add more emojis periodically
+        setInterval(() => {
+            if (container.children.length < 100) {
+                createEmoji();
+            }
+        }, 500);
+
+        // Click anywhere to create explosion of emojis
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < 10; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji pulse';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = e.clientX + 'px';
+                emoji.style.top = e.clientY + 'px';
+                emoji.style.fontSize = '60px';
+                container.appendChild(emoji);
+                
+                setTimeout(() => {
+                    emoji.style.transition = 'all 1s ease-out';
+                    emoji.style.left = (e.clientX + (Math.random() - 0.5) * 300) + 'px';
+                    emoji.style.top = (e.clientY + (Math.random() - 0.5) * 300) + 'px';
+                    emoji.style.opacity = '0';
+                }, 10);
+                
+                setTimeout(() => emoji.remove(), 1100);
+            }
+        });
+    </script>
+</body>
+</html>
