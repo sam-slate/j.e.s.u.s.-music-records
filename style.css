@@ -255,7 +255,7 @@ footer {
     padding: 2px 4px 2px 2px;
     position: relative;
     white-space: nowrap;
-    zoom: 1.5;
+    zoom: 1.2;  /* Changed from 1.5 */
 }
 
 .button--netscape:hover,
@@ -524,11 +524,32 @@ footer {
 }
 
 /* Dance mode styles */
+/* Dance mode styles - background will be set dynamically */
 body.dance-mode {
-    background-image: url('jesusflashing.gif');
     background-repeat: repeat;
-    background-size: 200px 200px;  /* Adjust size as needed */
-    animation: none;  /* Remove the color flash animation */
+    background-size: 200px 200px;
+    animation: none;
+}
+
+/* Individual dance mode backgrounds */
+body.dance-mode-1 {
+    background-image: url('jesusflashing.gif');
+}
+
+body.dance-mode-2 {
+    background-image: url('jesusgif2.gif');
+}
+
+body.dance-mode-3 {
+    background-image: url('jesusgif3.gif');
+}
+
+body.dance-mode-4 {
+    background-image: url('jesusgif4.gif');
+}
+
+body.dance-mode-5 {
+    background-image: url('jesusgif5.gif');
 }
 
 @keyframes backgroundFlash {
@@ -926,4 +947,52 @@ body.request-page {
     width: 100%;
     height: 100%;
     border: 3px solid #000;
+}
+
+@media (max-width: 768px) {
+    .premier-marquee {
+        pointer-events: none;
+    }
+    
+    /* Make sure interactive elements are clickable */
+    .button-container,
+    .music-player,
+    .player-controls button,
+    button {
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 9999;
+    }
+    
+    /* Fix button positioning */
+    .button-container {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .album-art,
+    .progress-container,
+    .player-controls {
+        pointer-events: auto !important;
+        z-index: 10000;
+    }
+    
+    /* If there's an overlay on the vinyl */
+    #albumArt {
+        pointer-events: none;
+    }
+    
+    /* But make sure the container is clickable */
+    .album-art {
+        pointer-events: auto !important;
+    }
 }
