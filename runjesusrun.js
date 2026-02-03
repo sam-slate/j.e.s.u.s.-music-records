@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const jesus = document.getElementById('jesus');
     const chasers = document.querySelectorAll('.jewish-person');
     const gameAudio = document.getElementById('gameAudio');
+    const timerDisplay = document.getElementById('timer');
+    const highScoreDisplay = document.getElementById('highScore');
     
     if (!jesus) return;
     
@@ -13,11 +15,69 @@ document.addEventListener('DOMContentLoaded', function() {
     let gameOver = false;
     let audioStarted = false;
     
+    // Timer variables
+    let startTime = null;
+    let timerInterval = null;
+    let currentTime = 0;
+    let highScore = localStorage.getItem('runJesusHighScore') || 0;
+    
+    // Display initial high score
+    highScoreDisplay.textContent = formatTime(highScore);
+    
+    // Format time as M:SS
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    // Start the timer
+    function startTimer() {
+        console.log('startTimer called, startTime is:', startTime);
+        if (!startTime) {
+            startTime = Date.now();
+            console.log('Timer started at:', startTime);
+            timerInterval = setInterval(updateTimer, 100);
+        }
+    }
+    
+    // Update timer display
+    function updateTimer() {
+        if (gameOver) return;
+        currentTime = (Date.now() - startTime) / 1000;
+        console.log('Updating timer:', currentTime, 'Display element:', timerDisplay);
+        timerDisplay.textContent = formatTime(currentTime);
+    }
+        
+    // Stop timer and check for high score
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            
+            // Check if new high score
+            if (currentTime > highScore) {
+                highScore = currentTime;
+                localStorage.setItem('runJesusHighScore', highScore);
+                highScoreDisplay.textContent = formatTime(highScore);
+            }
+        }
+    }
+    
     // Initialize chasers at random positions with wander direction
     const chaserPositions = [];
+    const minDistance = 200; // Minimum distance from Jesus in pixels
+
     chasers.forEach((chaser, index) => {
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
+        let x, y, distance;
+        
+        // Keep generating random positions until we find one far enough from Jesus
+        do {
+            x = Math.random() * window.innerWidth;
+            y = Math.random() * window.innerHeight;
+            distance = Math.sqrt(Math.pow(jesusX - x, 2) + Math.pow(jesusY - y, 2));
+        } while (distance < minDistance);
+        
         chaserPositions.push({ 
             x, 
             y,
@@ -39,10 +99,18 @@ document.addEventListener('DOMContentLoaded', function() {
     jesus.style.top = jesusY + 'px';
     
     document.addEventListener('keydown', function(e) {
+        console.log('Key pressed:', e.key);  // Add this line first
+        
         // Start audio on first keypress
         if (!audioStarted && gameAudio) {
             gameAudio.play().catch(err => console.log('Audio play failed:', err));
             audioStarted = true;
+        }
+        
+        // Start timer on first movement
+        if (!startTime && keys.hasOwnProperty(e.key)) {
+            console.log('About to start timer');  // Add this too
+            startTimer();
         }
         
         if(keys.hasOwnProperty(e.key)) {
@@ -69,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create falling crosses
     function createCrossRain() {
         gameOver = true;
+        stopTimer();
         
         const crosses = [];
         for(let i = 0; i < 200; i++) {
@@ -120,14 +189,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Reset the game
     function resetGame() {
         gameOver = false;
+        startTime = null;
+        currentTime = 0;
+        timerDisplay.textContent = '0:00';
+        
         jesusX = window.innerWidth / 2;
         jesusY = window.innerHeight / 2;
         jesus.style.left = jesusX + 'px';
         jesus.style.top = jesusY + 'px';
         
+        const minDistance = 200;
+        
         chasers.forEach((chaser, index) => {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
+            let x, y, distance;
+            
+            do {
+                x = Math.random() * window.innerWidth;
+                y = Math.random() * window.innerHeight;
+                distance = Math.sqrt(Math.pow(jesusX - x, 2) + Math.pow(jesusY - y, 2));
+            } while (distance < minDistance);
+            
             chaserPositions[index] = { 
                 x, 
                 y,
@@ -137,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             chaser.style.left = x + 'px';
             chaser.style.top = y + 'px';
         });
-        
+    
         updatePosition();
     }
     
