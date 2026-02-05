@@ -138,6 +138,7 @@ const playlist = [
         audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.mp3', 
         cover: 'placeholder-cover-art.png',
         title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION',
+        artists: ['Diva Nigun', 'Mikhl Yashinsky'],  // Array of artists
         lyricsFile: 'wwjs-lyrics.txt',
         lyricsDisplay: 'scrolling',
         lyricsStartTime: 50,
@@ -148,12 +149,13 @@ const playlist = [
         danceModes: [
             { startTime: 169, endTime: 200 }
         ],
-        danceBackground: 'jesusflashing.gif'  // Track 1 dance background
+        danceBackground: 'jesusflashing.gif'
     },
     { 
         audio: 'ana bchoakh remix ! - ana bchoke me march 2025 1.mp3',
         cover: 'placeholder-cover-art.png',
         title: 'Ana B\'choke Me',
+        artists: ['Diva Nigun'],  // Array with single artist
         lyricsFile: 'ana-lyrics.txt',
         lyricsDisplay: 'scrolling',
         lyricsStartTime: 0,
@@ -161,7 +163,7 @@ const playlist = [
         danceModes: [
             { startTime: 55.5, endTime: 83}
         ],
-        danceBackground: 'jesusgif2.gif'  // Track 2 dance background
+        danceBackground: 'jesusgif2.gif'
     },
 ];
 
@@ -295,6 +297,11 @@ function loadTrack(index) {
     audioPlayer.src = playlist[index].audio;
     albumArt.src = playlist[index].cover;
     trackTitle.textContent = playlist[index].title;
+    
+    // Format artists with commas
+    const artistText = playlist[index].artists.join(', ');
+    document.getElementById('trackArtist').textContent = artistText;
+    
     currentTrack = index;
     loadLyrics(playlist[index]);
 }

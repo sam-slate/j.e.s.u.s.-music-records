@@ -363,11 +363,11 @@ footer {
 
 .record-container {
     position: absolute;
-    top: 40%;
+    top: 37%;  /* Changed from 40% - moves it up */
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
+    width: 130px;  /* Changed from 150px - makes it smaller */
+    height: 130px;  /* Changed from 150px - makes it smaller */
 }
 
 .album-art {
@@ -1021,4 +1021,22 @@ body.request-page {
 
 .high-score {
     color: #d4af37; /* Gold color */
+}
+
+.music-marquee {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 5px 0;
+    z-index: 200;
+    display: none;  /* Hidden by default */
+}
+
+.music-marquee.show {
+    display: block;
 }

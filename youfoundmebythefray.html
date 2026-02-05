@@ -5,36 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.E.S.U.S. Music Records - You Found Me</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1400px;
+        }
+
+        .side-gif {
+            width: 300px;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        /* Hide gifs initially */
+        .side-gif.hidden {
+            visibility: hidden;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 560px;
+            width: 560px;
+            flex-shrink: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <img src="jesuspixel.gif" alt="J.E.S.U.S. Music Records Logo" class="logo">
-                <div class="menorah-container">
-                    <a href="jewishhype.html">
-                        <img src="menorah.gif" alt="Menorah" class="menorah menorah-left">
-                    </a>
-                    <a href="jewishhype.html">
-                        <img src="menorah.gif" alt="Menorah" class="menorah menorah-right">
-                    </a>
-                </div>
-            </div>
-            <h1>Jewish Electronica Style Using Samples</h1>
-        </header>
-        
-        <div class="page-content">
-            <h2>You Found Me by The Fray</h2>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/jFg_8u87zT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+    <h2>You Found Me by The Fray</h2>
+    
+    <div class="video-wrapper">
+        <img src="you found me gif p1 42.5 sec.gif" alt="Side decoration" class="side-gif hidden" id="leftGif">
+        <div class="video-container">
+            <iframe id="youtubeVideo" src="https://www.youtube.com/embed/jFg_8u87zT0?enablejsapi=1" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
         </div>
-
-        <footer>
-            <p>&copy; 2026 J.E.S.U.S. Music Records. All rights reserved.</p>
-        </footer>
+        <img src="you found me gif p1 42.5 sec.gif" alt="Side decoration" class="side-gif hidden" id="rightGif">
     </div>
 
-    <marquee class="premier-marquee" scrollamount="12" loop="infinite">The premier place for Jewish music ✡ The premier place for Jewish music ✡ The premier place for Jewish music ✡ </marquee>
+    <script>
+        console.log('Script starting...');
+        
+        // Array of gifs with their individual durations (in milliseconds)
+        const gifSequence = [
+            { file: 'you found me gif p1 42.5 sec.gif', duration: 42500 },
+            { file: 'you found me gif p2.gif', duration: 55000 }
+            // Add more gifs here as you create them:
+            // { file: 'you-found-me-part3.gif', duration: 55000 },
+            // { file: 'you-found-me-part4.gif', duration: 48000 }
+        ];
+        
+        let currentGifIndex = 0;
+        let gifTimeout = null;
+        
+        // Load YouTube IFrame API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        
+        // This function is called automatically by YouTube API
+        window.onYouTubeIframeAPIReady = function() {
+            console.log('YouTube API ready');
+            player = new YT.Player('youtubeVideo', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function loadNextGif() {
+            currentGifIndex++;
+            if (currentGifIndex >= gifSequence.length) {
+                currentGifIndex = 0; // Loop back to start
+            }
+            
+            const leftGif = document.getElementById('leftGif');
+            const rightGif = document.getElementById('rightGif');
+            
+            console.log('Loading gif:', gifSequence[currentGifIndex].file);
+            
+            // Update to next gif
+            leftGif.src = gifSequence[currentGifIndex].file;
+            rightGif.src = gifSequence[currentGifIndex].file;
+            
+            // Schedule next gif change based on current gif's duration
+            gifTimeout = setTimeout(loadNextGif, gifSequence[currentGifIndex].duration);
+        }
+        
+        function startGifSequence() {
+            currentGifIndex = 0;
+            const leftGif = document.getElementById('leftGif');
+            const rightGif = document.getElementById('rightGif');
+            
+            console.log('Starting gif sequence');
+            
+            // Load first gif
+            leftGif.src = gifSequence[currentGifIndex].file;
+            rightGif.src = gifSequence[currentGifIndex].file;
+            
+            // Show gifs
+            leftGif.classList.remove('hidden');
+            rightGif.classList.remove('hidden');
+            
+            // Schedule next gif change (if there are more gifs)
+            if (gifSequence.length > 1) {
+                if (gifTimeout) clearTimeout(gifTimeout);
+                gifTimeout = setTimeout(loadNextGif, gifSequence[currentGifIndex].duration);
+            }
+        }
+        
+        function stopGifSequence() {
+            console.log('Stopping gif sequence');
+            
+            // Clear timeout
+            if (gifTimeout) {
+                clearTimeout(gifTimeout);
+                gifTimeout = null;
+            }
+            
+            // Hide gifs
+            const leftGif = document.getElementById('leftGif');
+            const rightGif = document.getElementById('rightGif');
+            leftGif.classList.add('hidden');
+            rightGif.classList.add('hidden');
+        }
+
+        function onPlayerStateChange(event) {
+            console.log('Player state changed:', event.data);
+            
+            // YT.PlayerState.PLAYING = 1
+            if (event.data == 1) {
+                console.log('Video playing - starting gif sequence');
+                startGifSequence();
+            } else {
+                console.log('Video paused/stopped - stopping gif sequence');
+                stopGifSequence();
+            }
+        }
+    </script>
 </body>
 </html>

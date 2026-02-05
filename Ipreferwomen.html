@@ -69,6 +69,26 @@
         .mary-gif:nth-child(26) { width: 16%; top: 40%; left: 85%; z-index: 4; }
         .mary-gif:nth-child(27) { width: 17%; top: 65%; left: 12%; z-index: 4; }
         .mary-gif:nth-child(28) { width: 15%; top: 90%; left: 58%; z-index: 4; }
+
+         /* Music marquee */
+        .music-marquee {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: transparent;  /* Changed from rgba(0, 0, 0, 0.8) */
+            color: black;  /* Changed from white */
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 5px 0;
+            z-index: 200;
+            display: none;
+        }
+
+        .music-marquee.show {
+            display: block;
+        }
+        }
     </style>
 </head>
 <body>
@@ -107,10 +127,16 @@
         <source src="Hava Maria by Klezmozarts.mp3" type="audio/mpeg">
     </audio>
 
+    <div class="music-marquee" id="musicMarquee">
+        <marquee scrollamount="5">"Hava Maria", Klezmozarts</marquee>
+    </div>
+
     <script>
         const collage = document.getElementById('collage');
         const maryAudio = document.getElementById('maryAudio');
         let audioStarted = false;
+        
+        console.log('Script loaded, elements:', { collage, maryAudio, marquee: document.getElementById('musicMarquee') });
         
         const fonts = [
             'serif',
@@ -129,10 +155,17 @@
         ];
 
         document.addEventListener('click', (e) => {
+            console.log('Click detected, audioStarted:', audioStarted);
+            
             // Start audio on first click
             if (!audioStarted) {
                 maryAudio.play().catch(err => console.log('Audio play failed:', err));
                 audioStarted = true;
+
+                // Show marquee when music starts
+                const marquee = document.getElementById('musicMarquee');
+                console.log('Adding show class to marquee:', marquee);
+                marquee.classList.add('show');
             }
             
             const numberOfMarys = 15; // Number of "Mary" texts to explode
