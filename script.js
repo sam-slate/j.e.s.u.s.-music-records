@@ -25,11 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Pop-up ads functionality
-    const images = ['image1.png', 'image2.jpeg', 'image3.png', 'image4.jpeg', 'image5.jpg'];
-    let popupCount = 0;
-    const maxPopups = images.length;
-    
+    // Pop-up ads functionality - but not on mobile
+const images = ['image1.png', 'image2.jpeg', 'image3.png', 'image4.jpeg', 'image5.jpg'];
+let popupCount = 0;
+const maxPopups = images.length;
+
+// Skip pop-ups entirely on mobile
+if (window.innerWidth > 768) {
     function makeDraggable(element) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         element.onmousedown = dragMouseDown;
@@ -119,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 10000);
     }, 10000);
+}
 });
 
 // Music player setup
@@ -135,8 +138,9 @@ const playlist = [
         audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.mp3', 
         cover: 'placeholder-cover-art.png',
         title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION',
+        artists: ['Diva Nigun', 'Mikhl Yashinsky'],  // Array of artists
         lyricsFile: 'wwjs-lyrics.txt',
-        lyricsDisplay: 'scrolling',  // Add this line
+        lyricsDisplay: 'scrolling',
         lyricsStartTime: 50,
         lyricsEndTime: 180,
         lyricsPauses: [
@@ -144,19 +148,22 @@ const playlist = [
         ],
         danceModes: [
             { startTime: 169, endTime: 200 }
-        ]
+        ],
+        danceBackground: 'jesusflashing.gif'
     },
     { 
         audio: 'ana bchoakh remix ! - ana bchoke me march 2025 1.mp3',
         cover: 'placeholder-cover-art.png',
         title: 'Ana B\'choke Me',
+        artists: ['Diva Nigun'],  // Array with single artist
         lyricsFile: 'ana-lyrics.txt',
-        lyricsDisplay: 'static',  // Add this line - change to 'static' or 'none' if needed
+        lyricsDisplay: 'scrolling',
         lyricsStartTime: 0,
         lyricsEndTime: 150,
         danceModes: [
             { startTime: 55.5, endTime: 83}
-        ]
+        ],
+        danceBackground: 'jesusgif2.gif'
     },
 ];
 
@@ -218,11 +225,21 @@ function checkDanceMode() {
         }
     }
     
-    // Toggle dance mode class
+    // Toggle dance mode class and set background
     if (inDanceMode) {
-        document.body.classList.add('dance-mode');
+        if (!document.body.classList.contains('dance-mode')) {
+            document.body.classList.add('dance-mode');
+            
+            // Set the specific dance mode background
+            // Remove any existing dance mode class
+            document.body.classList.remove('dance-mode-1', 'dance-mode-2', 'dance-mode-3', 'dance-mode-4', 'dance-mode-5');
+            
+            // Add the class for this track's dance background
+            const danceIndex = currentTrack + 1;
+            document.body.classList.add(`dance-mode-${danceIndex}`);
+        }
     } else {
-        document.body.classList.remove('dance-mode');
+        document.body.classList.remove('dance-mode', 'dance-mode-1', 'dance-mode-2', 'dance-mode-3', 'dance-mode-4', 'dance-mode-5');
     }
 }
 
@@ -280,6 +297,11 @@ function loadTrack(index) {
     audioPlayer.src = playlist[index].audio;
     albumArt.src = playlist[index].cover;
     trackTitle.textContent = playlist[index].title;
+    
+    // Format artists with commas
+    const artistText = playlist[index].artists.join(', ');
+    document.getElementById('trackArtist').textContent = artistText;
+    
     currentTrack = index;
     loadLyrics(playlist[index]);
 }
@@ -322,12 +344,12 @@ audioPlayer.addEventListener('ended', () => {
 // Stop rotation when paused
 audioPlayer.addEventListener('pause', () => {
     albumArt.classList.remove('rotating');
-    document.body.classList.remove('dance-mode');  // Stop dance mode when paused
+    document.body.classList.remove('dance-mode', 'dance-mode-1', 'dance-mode-2', 'dance-mode-3', 'dance-mode-4', 'dance-mode-5');
 });
 
 audioPlayer.addEventListener('play', () => {
     albumArt.classList.add('rotating');
-    checkDanceMode();  // Resume dance mode check when playing
+    checkDanceMode();
 });
 
 // Update progress bar, times, and lyrics as song plays

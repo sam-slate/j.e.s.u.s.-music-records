@@ -4,37 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.E.S.U.S. Music Records - You Found Me</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        @font-face {
+            font-family: 'Aldrich';
+            src: url('./Aldrich-Regular.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('background.jpeg');
+            background-repeat: repeat;
+            background-size: 100px 100px;
+            font-family: 'Aldrich', 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        h2 {
+            font-size: 2em;
+            text-align: center;
+            color: black;
+            margin-bottom: 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;  /* Set to 0 and use margin instead */
+            margin-top: 15vh;
+        }
+
+
+        .video-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0px;
+            margin-top: -90px;  /* Add this */
+        }
+
+        .side-gif {
+            width: 360px;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .side-gif.hidden {
+            visibility: hidden;
+        }
+
+        .video-container {
+            width: 560px;
+            height: 315px;
+            flex-shrink: 0;
+        }
+
+        .video-container iframe {
+            width: 560px;
+            height: 315px;
+            border: 3px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <img src="jesuspixel.gif" alt="J.E.S.U.S. Music Records Logo" class="logo">
-                <div class="menorah-container">
-                    <a href="jewishhype.html">
-                        <img src="menorah.gif" alt="Menorah" class="menorah menorah-left">
-                    </a>
-                    <a href="jewishhype.html">
-                        <img src="menorah.gif" alt="Menorah" class="menorah menorah-right">
-                    </a>
-                </div>
-            </div>
-            <h1>Jewish Electronica Style Using Samples</h1>
-        </header>
+    <div class="content-wrapper">
+        <h2>You Found Me by The Fray</h2>
         
-        <div class="page-content">
-            <h2>You Found Me by The Fray</h2>
+        <div class="video-wrapper">
+            <img src="full you found me 1.gif" alt="Side decoration" class="side-gif hidden" id="leftGif">
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/jFg_8u87zT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="youtubeVideo" src="https://www.youtube.com/embed/jFg_8u87zT0?enablejsapi=1" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
             </div>
+            <img src="full you found me 1.gif" alt="Side decoration" class="side-gif hidden" id="rightGif">
         </div>
-
-        <footer>
-            <p>&copy; 2026 J.E.S.U.S. Music Records. All rights reserved.</p>
-        </footer>
     </div>
 
-    <marquee class="premier-marquee" scrollamount="12" loop="infinite">The premier place for Jewish music ✡ The premier place for Jewish music ✡ The premier place for Jewish music ✡ </marquee>
+    <script>
+        console.log('Script starting...');
+        
+        // Load YouTube IFrame API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        
+        // This function is called automatically by YouTube API
+        window.onYouTubeIframeAPIReady = function() {
+            console.log('YouTube API ready');
+            player = new YT.Player('youtubeVideo', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            console.log('Player state changed:', event.data);
+            const leftGif = document.getElementById('leftGif');
+            const rightGif = document.getElementById('rightGif');
+            
+            // YT.PlayerState.PLAYING = 1
+            if (event.data == 1) {
+                console.log('Video playing - showing gifs');
+                leftGif.classList.remove('hidden');
+                rightGif.classList.remove('hidden');
+                
+                // Reload gifs to restart animation
+                const leftSrc = leftGif.src;
+                const rightSrc = rightGif.src;
+                leftGif.src = '';
+                rightGif.src = '';
+                setTimeout(() => {
+                    leftGif.src = leftSrc;
+                    rightGif.src = rightSrc;
+                }, 10);
+            } else {
+                console.log('Video paused/stopped - hiding gifs');
+                leftGif.classList.add('hidden');
+                rightGif.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
