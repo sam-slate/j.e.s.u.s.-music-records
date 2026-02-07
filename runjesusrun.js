@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     jesus.style.top = jesusY + 'px';
     
     document.addEventListener('keydown', function(e) {
-        console.log('Key pressed:', e.key);  // Add this line first
+        console.log('Key pressed:', e.key);
         
         // Start audio on first keypress
         if (!audioStarted && gameAudio) {
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Start timer on first movement
         if (!startTime && keys.hasOwnProperty(e.key)) {
-            console.log('About to start timer');  // Add this too
+            console.log('About to start timer');
             startTimer();
         }
         
@@ -292,4 +292,44 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Start the game loop
     updatePosition();
+    
+    // Mobile touch controls - MOVED INSIDE DOMContentLoaded
+    document.querySelectorAll('.arrow-btn').forEach(btn => {
+        btn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const key = btn.dataset.key;
+            
+            // Start audio on first touch
+            if (!audioStarted && gameAudio) {
+                gameAudio.play().catch(err => console.log('Audio play failed:', err));
+                audioStarted = true;
+            }
+            
+            // Start timer on first movement
+            if (!startTime) {
+                startTimer();
+            }
+            
+            // Simulate keydown event
+            const event = new KeyboardEvent('keydown', {
+                key: key,
+                code: key,
+                bubbles: true
+            });
+            document.dispatchEvent(event);
+        });
+        
+        btn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            const key = btn.dataset.key;
+            
+            // Simulate keyup event
+            const event = new KeyboardEvent('keyup', {
+                key: key,
+                code: key,
+                bubbles: true
+            });
+            document.dispatchEvent(event);
+        });
+    });
 });
