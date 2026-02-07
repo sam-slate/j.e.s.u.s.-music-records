@@ -130,13 +130,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check collision between Jesus and a chaser
     function checkCollision(chaserPos) {
-        const distance = Math.sqrt(
-            Math.pow(jesusX - chaserPos.x, 2) + 
-            Math.pow(jesusY - chaserPos.y, 2)
-        );
-        return distance < 40;
+        const dx = Math.abs(jesusX - chaserPos.x);
+        const dy = Math.abs(jesusY - chaserPos.y);
+        
+        // Oval collision - different thresholds for horizontal vs vertical
+        const horizontalThreshold = 25; // Width
+        const verticalThreshold = 45;   // Height
+        
+        // Ellipse collision formula
+        return (dx * dx) / (horizontalThreshold * horizontalThreshold) + 
+               (dy * dy) / (verticalThreshold * verticalThreshold) < 1;
     }
-    
+
     // Create falling crosses
     function createCrossRain() {
         gameOver = true;
