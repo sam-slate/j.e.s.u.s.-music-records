@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const crosses = [];
         const numCrosses = isMobile ? 100 : 200; // Fewer crosses on mobile
-        const crossSpeed = isMobile ? 4 : 2; // Faster on mobile
+        const crossSpeed = isMobile ? 15 : 2; // Much faster base speed on mobile
         
         for(let i = 0; i < numCrosses; i++) {
             const cross = document.createElement('img');
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element: cross,
                 x: parseFloat(cross.style.left),
                 y: -200,
-                speed: crossSpeed + Math.random() * 4
+                speed: crossSpeed + Math.random() * (isMobile ? 10 : 4) // Bigger random range on mobile
             });
         }
         
