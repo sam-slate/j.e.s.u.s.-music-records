@@ -8,10 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!jesus) return;
     
+    // Mobile detection and speed adjustments
+    const isMobile = window.innerWidth <= 768;
+    
     let jesusX = window.innerWidth / 2;
     let jesusY = window.innerHeight / 2;
     const moveSpeed = 3;
-    const chaserSpeed = 1;
+    const chaserSpeed = isMobile ? 0.6 : 1; // Slower on mobile
     let gameOver = false;
     let audioStarted = false;
     
@@ -140,12 +143,15 @@ document.addEventListener('DOMContentLoaded', function() {
         stopTimer();
         
         const crosses = [];
-        for(let i = 0; i < 200; i++) {
+        const numCrosses = isMobile ? 100 : 200; // Fewer crosses on mobile
+        const crossSpeed = isMobile ? 4 : 2; // Faster on mobile
+        
+        for(let i = 0; i < numCrosses; i++) {
             const cross = document.createElement('img');
             cross.src = 'cross.png';
             cross.className = 'falling-cross';
             cross.style.position = 'fixed';
-            cross.style.width = '100px';
+            cross.style.width = isMobile ? '50px' : '100px'; // Smaller on mobile
             cross.style.height = 'auto';
             cross.style.left = (Math.random() * (window.innerWidth + 200)) - 100 + 'px';
             cross.style.top = '-200px';
@@ -157,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element: cross,
                 x: parseFloat(cross.style.left),
                 y: -200,
-                speed: 2 + Math.random() * 4
+                speed: crossSpeed + Math.random() * 4
             });
         }
         
@@ -293,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start the game loop
     updatePosition();
     
-    // Mobile touch controls - MOVED INSIDE DOMContentLoaded
+    // Mobile touch controls
     document.querySelectorAll('.arrow-btn').forEach(btn => {
         btn.addEventListener('touchstart', (e) => {
             e.preventDefault();
