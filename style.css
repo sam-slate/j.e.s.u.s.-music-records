@@ -1071,3 +1071,45 @@ body.request-page {
     margin: 40px auto;
     text-align: center;
 }
+
+/* Mobile Controls - hidden by default */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 10000;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.horizontal-arrows {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.arrow-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid #000;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.arrow-btn:active {
+    background-color: chartreuse;
+    transform: scale(0.95);
+}
+
+/* Show on mobile/tablet */
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: flex;
+    }
+}
