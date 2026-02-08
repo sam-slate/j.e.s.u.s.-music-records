@@ -102,7 +102,20 @@ document.addEventListener('DOMContentLoaded', function() {
     jesus.style.top = jesusY + 'px';
     
     document.addEventListener('keydown', function(e) {
+
         console.log('Key pressed:', e.key);
+        
+        // Hide instructions on first keypress
+        const instructions = document.getElementById('desktop-instructions');
+        if (instructions && !instructions.classList.contains('hidden')) {
+            instructions.classList.add('hidden');
+        }
+        
+        // Start audio on first keypress
+        if (!audioStarted && gameAudio) {
+            gameAudio.play().catch(err => console.log('Audio play failed:', err));
+            audioStarted = true;
+        }
         
         // Start audio on first keypress
         if (!audioStarted && gameAudio) {
