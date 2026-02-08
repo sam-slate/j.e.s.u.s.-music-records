@@ -970,11 +970,14 @@ body.request-page {
         left: auto !important;
         top: auto !important;
         transform: none !important;
-        display: flex;
-        flex-direction: column;
+        display: grid !important;  /* Changed from flex */
+        grid-template-columns: 1fr 1fr;  /* Two equal columns */
+        gap: 10px;
         align-items: center;
+        justify-content: center;
         margin: 20px auto;
         width: 90%;
+        max-width: 500px;  /* Prevent buttons from getting too wide */
     }
 }
 

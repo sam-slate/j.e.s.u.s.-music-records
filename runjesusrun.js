@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let jesusX = window.innerWidth / 2;
     let jesusY = window.innerHeight / 2;
     const moveSpeed = 3;
-    const chaserSpeed = isMobile ? 0.6 : 1; // Slower on mobile
+    const chaserSpeed = isMobile ? 0.75 : 1; // Changed from 0.6 to 0.75 on mobile
     let gameOver = false;
     let audioStarted = false;
     
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
             x, 
             y,
             wanderAngle: Math.random() * Math.PI * 2,
-            wanderSpeed: 0.05
+            wanderSpeed: isMobile ? 0.02 : 0.05  // Less wandering on mobile
         });
         chaser.style.left = x + 'px';
         chaser.style.top = y + 'px';
@@ -102,19 +102,12 @@ document.addEventListener('DOMContentLoaded', function() {
     jesus.style.top = jesusY + 'px';
     
     document.addEventListener('keydown', function(e) {
-
         console.log('Key pressed:', e.key);
         
         // Hide instructions on first keypress
         const instructions = document.getElementById('desktop-instructions');
         if (instructions && !instructions.classList.contains('hidden')) {
             instructions.classList.add('hidden');
-        }
-        
-        // Start audio on first keypress
-        if (!audioStarted && gameAudio) {
-            gameAudio.play().catch(err => console.log('Audio play failed:', err));
-            audioStarted = true;
         }
         
         // Start audio on first keypress
@@ -237,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 x, 
                 y,
                 wanderAngle: Math.random() * Math.PI * 2,
-                wanderSpeed: 0.05
+                wanderSpeed: isMobile ? 0.02 : 0.05  // Less wandering on mobile
             };
             chaser.style.left = x + 'px';
             chaser.style.top = y + 'px';
@@ -287,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pos.wanderAngle += (Math.random() - 0.5) * pos.wanderSpeed;
                 
                 // Calculate wander offset using smooth angle
-                const wanderStrength = 0.5;
+                const wanderStrength = isMobile ? 0.2 : 0.5;  // Less wander on mobile
                 const wanderX = Math.cos(pos.wanderAngle) * wanderStrength;
                 const wanderY = Math.sin(pos.wanderAngle) * wanderStrength;
                 
