@@ -172,6 +172,18 @@ const playlist = [
             { startTime: 18, endTime: 47.75}
         ],
         danceBackground: 'jesusgif4.gif'
+    },
+    {
+        audio: 'marni great grandparent melody instagram mastered 2 clipped.mp3',
+        cover: 'placeholder-cover-art.png',
+        title: 'My Great Grandfather’s Kedusha',
+        artists: ['Diva Nigun', 'Marni Loffman'],
+        lyricsFile: '',
+        lyricsDisplay: 'scrolling',
+        lyricsStartTime: 0,
+        lyricsEndTime: 150,
+        danceModes: [],
+        danceBackground: 'jesusgif5.gif'
     }
 ];
 
