@@ -130,7 +130,7 @@ const totalTimeDisplay = document.getElementById('totalTime');
 const playlist = [
     { 
         audio: 'WWJS - KLEZTRONICA TUNNEL VERSION 1 copy.mp3', 
-        cover: 'placeholder-cover-art.png',
+        cover: 'wwjs kleztronica full blue solid cd 2.png',
         title: 'WWJS - KLEZTRONICA TUNNEL 770 VERSION',
         artists: ['Diva Nigun', 'Mikhl Yashinsky'],  // Array of artists
         lyricsFile: 'wwjs-lyrics.txt',

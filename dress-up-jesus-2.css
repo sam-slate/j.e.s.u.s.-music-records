@@ -128,6 +128,7 @@ h1 {
     padding: 0 20px 20px 20px;
     min-height: 0;
     overflow: hidden;
+    position: relative;
 }
 
 /* Dressers (Scrollable) */
@@ -181,6 +182,33 @@ h1 {
     cursor: grabbing;
 }
 
+/* Instructions Text */
+.instructions {
+    position: absolute;
+    left: 240px; /* Position to right of left dresser (200px width + 20px gap + 20px padding) */
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Aldrich', 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    padding: 15px;
+    max-width: 180px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #000;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.instructions p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
 /* Jesus Container (Center) */
 .jesus-container {
     flex: 1;
@@ -192,7 +220,7 @@ h1 {
 }
 
 .jesus-body {
-    max-width: 200px;
+    max-width: 180px;
     height: auto;
     image-rendering: pixelated;
     position: relative;
@@ -211,7 +239,7 @@ h1 {
 
 .jesus-hands {
     position: absolute;
-    max-width: 200px;
+    max-width: 180px;
     height: auto;
     image-rendering: pixelated;
     z-index: 1000;
@@ -234,6 +262,20 @@ h1 {
 
 .clothing-item.dragging {
     opacity: 0.8;
+}
+
+/* Tablet/Small Desktop - Scale down Jesus */
+@media (max-width: 1024px) {
+    .jesus-body,
+    .jesus-hands {
+        max-width: 140px;
+    }
+    
+    .instructions {
+        font-size: 12px;
+        padding: 12px;
+        left: 220px;
+    }
 }
 
 /* Mobile Styles */
@@ -281,86 +323,7 @@ h1 {
 
     .jesus-body,
     .jesus-hands {
-        max-width: 120px;
-    }
-}
-
-/* Instructions Text */
-.instructions {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    font-family: 'Aldrich', 'Arial', sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #000;
-    text-align: center;
-    padding: 15px;
-    max-width: 180px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid #000;
-    border-radius: 8px;
-    align-self: flex-start;
-}
-
-.instructions p {
-    margin: 8px 0;
-    line-height: 1.5;
-}
-
-/* Mobile - hide instructions */
-@media (max-width: 768px) {
-    .instructions {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .logo {
-        max-width: 150px;
-    }
-
-    h1 {
-        font-size: 1em;
-    }
-
-    .menorah {
-        max-width: 40px;
-    }
-
-    .menorah-left {
-        left: -50px;
-    }
-
-    .menorah-right {
-        right: -50px;
-    }
-
-    .style-switcher {
-        gap: 5px;
-        margin: 5px 0;
-    }
-
-    .style-btn {
-        padding: 6px 10px;
-        font-size: 11px;
-    }
-
-    .dress-up-area {
-        gap: 10px;
-        padding: 0 10px 10px 10px;
-    }
-
-    .dresser {
-        width: 120px;
-        padding: 5px;
-        gap: 5px;
-    }
-
-    .jesus-body,
-    .jesus-hands {
-        max-width: 100px;  /* Changed from 120px to 100px */
+        max-width: 100px;
     }
     
     .instructions {
